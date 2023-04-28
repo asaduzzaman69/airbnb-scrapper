@@ -1,5 +1,5 @@
 1
-const openAIKey = "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";
+const openAIKey = "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";
 
 
 

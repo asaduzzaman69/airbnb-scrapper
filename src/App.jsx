@@ -17,11 +17,11 @@ function App() {
     try {
       setStatus('loading');
       const response = await axios({
-        method: 'get',
-        url: 'http://localhost:5000/scrap-review',
+        method: "get",
+        url: "http://localhost:9999/scrap-review",
         params: {
-          url: websiteLink
-        }
+          url: websiteLink,
+        },
       });
 
       setStatus('success');
@@ -36,33 +36,38 @@ function App() {
 
 
   return (
-    <Box className="App" w={'600px'} m={'auto'} >
-      <Heading my={2} textAlign={'center'} >Get airbnb listing review</Heading>
+    <Box className="App" w={"600px"} m={"auto"}>
+      <Heading my={2} textAlign={"center"}>
+        Get airbnb listing review
+      </Heading>
       <Flex>
-        <Input value={websiteLink} onChange={(e) => setWebsiteLink(e.target.value)} />
-        <Button ml={1} onClick={handleClick} >Get reviews</Button>
+        <Input
+          value={websiteLink}
+          onChange={(e) => setWebsiteLink(e.target.value)}
+        />
+        <Button ml={1} onClick={handleClick}>
+          Get reviews
+        </Button>
       </Flex>
 
-      <Box mt={1} >
-        {
-          status === 'loading' ? (
-            <Flex my={2} alignItems={'center'} justifyContent={'center'} >
-              <Spinner />
-            </Flex>
-          ) : status === 'error' ? (
-            <Text>Something went wrong</Text>
-          ) : status === 'success' ? (
-            <Box>
-              <h2>All reviews</h2>
-              {
-                reviews?.map((el) => (
-                  <Review review={el} />
-                ))
-              }
-              hey
-            </Box>
-          ) : ''
-        }
+      <Box mt={1}>
+        {status === "loading" ? (
+          <Flex my={2} alignItems={"center"} justifyContent={"center"}>
+            <Spinner />
+          </Flex>
+        ) : status === "error" ? (
+          <Text>Something went wrong</Text>
+        ) : status === "success" ? (
+          <Box>
+            <h2>All reviews. Review length: {reviews.length}</h2>
+            {reviews?.map((el) => (
+              <Review review={el} />
+            ))}
+            hey
+          </Box>
+        ) : (
+          ""
+        )}
       </Box>
     </Box>
   );
